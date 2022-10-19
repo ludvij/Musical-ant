@@ -27,7 +27,8 @@ function start_ant() {
 	create_ant(X, Y)
 	// set_ant_rules('LRRRRRLLR')
 	// set_ant_rules('LLRRRLRRRRRR')
-	create_rnd_ant_rules(12)
+	set_ant_rules('RRLLLRLLLRRR')
+	// create_rnd_ant_rules(12)
 	sd = step_ant()
 }
 

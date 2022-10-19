@@ -1,6 +1,6 @@
 
 const ant_grid = []
-const ant_ptr = {
+const ant = {
 	x : 0,
 	y : 0,
 	orientation : 0,
@@ -23,10 +23,12 @@ function create_ant(w, h, tiling=set_square_ant_tiling) {
 			ant_grid[i][j] = 0
 		}
 	}
-	ant_ptr.x = w / 2
-	ant_ptr.y = h / 2
+	ant.x = w / 2
+	ant.y = h / 2
+	ant.orientation = 0
+	ant.step = 0
 	console.log('Created ant for grid ['+w+', '+h+']')
-	console.log('Created ant at: ['+ant_ptr.x+', '+ant_ptr.y+']')
+	console.log('Created ant at: ['+ant.x+', '+ant.y+']')
 	tiling()
 }
 
@@ -66,7 +68,7 @@ function create_rule(direction) {
 function set_ant_rules(rules) {
 	console.log('using ruleSet: ' + rules)
 	for(let i = 0; i < rules.length; i++) {
-		ant_ptr.rules[i] = create_rule(rules.charAt(i))
+		ant.rules[i] = create_rule(rules.charAt(i))
 	}
 }
 
@@ -80,7 +82,7 @@ function create_rnd_ant_rules(n) {
 		let chooser = random_int(0, rule_types.length)
 		let rule = rule_types[chooser]
 		rules += rule
-		ant_ptr.rules[i] = create_rule(rule)
+		ant.rules[i] = create_rule(rule)
 	}
 	console.log('using ruleSet: ' + rules)
 }
@@ -92,19 +94,20 @@ function create_rnd_ant_rules(n) {
  * the value of the color of that cell based on the rule used
  */
 function step_ant() {
-	let x = ant_ptr.x
-	let y = ant_ptr.y
+	let x = ant.x
+	let y = ant.y
 	let val = ant_grid[x][y]
-	let rule = ant_ptr.rules[val]
+	let rule = ant.rules[val]
+	// TODO: refactorize this
 	switch (rule.rule) {
-		case 'L': ant_ptr.orientation = ant_ptr.orientation > 0 ? ant_ptr.orientation -1 : 3
-		break
-		case 'R': ant_ptr.orientation = ant_ptr.orientation < ant_ptr.tiling.length-1 ? ant_ptr.orientation + 1 : 0
-		break
+		case 'R': ant.orientation = ant.orientation > 0 ? ant.orientation -1 : 3
+			break
+		case 'L': ant.orientation = ant.orientation < ant.tiling.length-1 ? ant.orientation + 1 : 0
+			break
 	}
-	ant_grid[x][y] = val < ant_ptr.rules.length -1 ? val + 1 : 0
-	for (let tiling of ant_ptr.tiling) {
-		if (tiling.index == ant_ptr.orientation) {
+	ant_grid[x][y] = val < ant.rules.length -1 ? val + 1 : 0
+	for (let tiling of ant.tiling) {
+		if (tiling.index == ant.orientation) {
 			tiling.operation()
 			break
 		}
@@ -112,20 +115,20 @@ function step_ant() {
 	
 	
 	let end = false
-	if (ant_ptr.x < 0 || ant_ptr.x >= ant_grid.length || ant_ptr.y < 0 || ant_ptr.y >= ant_grid[0].length) {
+	if (ant.x < 0 || ant.x >= ant_grid.length || ant.y < 0 || ant.y >= ant_grid[0].length) {
 		end = true
 		x = 0
 		y = 0
 	} else {
-		ant_ptr.step++
+		ant.step++
 	}
 	
 	return {
 		'x' : x,
 		'y' : y,
-		'color' : ant_ptr.rules[val].color,
+		'color' : ant.rules[val].color,
 		'end' : end,
-		'step': ant_ptr.step
+		'step': ant.step
 	}
 }
 /**
@@ -134,11 +137,11 @@ function step_ant() {
  */
 function set_square_ant_tiling() {
 	console.log('Using square based grid')
-	ant_ptr.tiling = []
-	add_orientation_operation(() => {ant_ptr.y -= 1})
-	add_orientation_operation(() => {ant_ptr.x += 1})
-	add_orientation_operation(() => {ant_ptr.y += 1})
-	add_orientation_operation(() => {ant_ptr.x -= 1})
+	ant.tiling = []
+	add_orientation_operation(() => {ant.y -= 1})
+	add_orientation_operation(() => {ant.x += 1})
+	add_orientation_operation(() => {ant.y += 1})
+	add_orientation_operation(() => {ant.x -= 1})
 }
 
 /**
@@ -146,8 +149,8 @@ function set_square_ant_tiling() {
  * @param {func} operation 
  */
 function add_orientation_operation(operation) {
-	ant_ptr.tiling[ant_ptr.tiling.length] = {
-		'index' : ant_ptr.tiling.length,
+	ant.tiling[ant.tiling.length] = {
+		'index' : ant.tiling.length,
 		'operation' : operation
 	}
 }
