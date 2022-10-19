@@ -11,17 +11,24 @@ let sd = {}
 function setup() {
 	createCanvas(WIDTH, HEIGHT)
 	frameRate(60)
-	background(255)
-	draw_grid()
-	stroke(255)
-	create_ant(X, Y)
-	set_ant_rules('LRRRRRLLR')
-	// create_rnd_ant_rules(12)
-	sd = step_ant()
+	
+	start_ant()
 }
 
 function draw() {
-	repeat(100)
+	repeat(1000)
+}
+
+
+function start_ant() {
+	background(255)
+	stroke(255)
+	// draw_grid()
+	create_ant(X, Y)
+	// set_ant_rules('LRRRRRLLR')
+	// set_ant_rules('LLRRRLRRRRRR')
+	create_rnd_ant_rules(12)
+	sd = step_ant()
 }
 
 function draw_grid() {
@@ -58,7 +65,7 @@ function repeat(n) {
 			sd = step_ant()
 		} else {
 			console.log('termianted in ' + sd.step +' steps')
-			break
+			start_ant()
 		}
 	}
 }
