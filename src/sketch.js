@@ -5,7 +5,7 @@ const HEIGHT = 800
 const X = 200
 const Y = 200
 const LEN_X = WIDTH / X
-const LEN_Y = WIDTH / Y
+const LEN_Y = HEIGHT / Y
 let sd = {}
 
 function setup() {
@@ -21,7 +21,7 @@ function setup() {
 }
 
 function draw() {
-	repeat(1000)
+	repeat(100)
 }
 
 function draw_grid() {
@@ -57,6 +57,7 @@ function repeat(n) {
 			paint_cell(sd.x, sd.y, cell_color)
 			sd = step_ant()
 		} else {
+			console.log('termianted in ' + sd.step +' steps')
 			break
 		}
 	}
