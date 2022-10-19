@@ -21,6 +21,9 @@ function create_ant(w, h) {
 	ant_ptr.y = h / 2
 }
 
+function random_int(min, max) {
+	return Math.floor(Math.random() * (max - min)) + min
+}
 function create_rule(direction, cr, cg, cb) {
 	return {
 		rule : direction,
@@ -33,9 +36,9 @@ function create_rule(direction, cr, cg, cb) {
 }
 function create_rnd_color() {
 	return {
-		'r' : Math.floor(Math.random() * 256),
-		'g' : Math.floor(Math.random() * 256),
-		'b' : Math.floor(Math.random() * 256)
+		'r' : random_int(0, 256),
+		'g' : random_int(0, 256),
+		'b' : random_int(0, 256)
 	}
 }
 function create_rule(direction) {
@@ -56,7 +59,7 @@ function create_rnd_ant_rules(n) {
 	let types = ['L','R']
 	let rules = ''
 	for(let i = 0; i < n; i++) {
-		let chooser = Math.floor(Math.random()*2)
+		let chooser = random_int(0, 2)
 		let rule = types[chooser]
 		rules += rule
 		ant_ptr.rules[i] = create_rule(rule)
