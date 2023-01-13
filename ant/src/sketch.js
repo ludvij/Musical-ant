@@ -3,19 +3,21 @@ let sd = {}
 let start = {}
 let sound_wait = 0
 
-const WIDTH = 800
-const HEIGHT = 800
+const WIDTH = 900
+const HEIGHT = 900
 const X = 200
 const Y = 200
 const LEN_X = WIDTH / X
 const LEN_Y = HEIGHT / Y
 const I1000 = 1 / 1000
-const TIME = 20
+const TIME = 30
 const FPS = 60
-const EXECUTIONS = 1200
+const EXECUTIONS = 1800
+// executions per draw call in order to achieve n executions a seconds
 const EXECUTIONS_PER_FRAME = EXECUTIONS / FPS
-const BPM = 120
-const FRAMES_TO_WAIT = FPS / (BPM / 60)
+const BPM = 180
+// frames to skip sound in order to get the bpm needed
+const FRAMES_TO_WAIT = FPS / BPM * 60
 
 function setup() {
 	createCanvas(WIDTH, HEIGHT)
