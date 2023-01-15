@@ -15,12 +15,12 @@ $$n = \frac{\text{FPS}}{B / 60}$$
 Una vez hayan pasado $n$ frames se recoge la regla y se reproduce el sonido.
 
 #### Creación de audio
-Todos los archivos de audio se han creado usando [FamiTracker](http://famitracker.com/), se han creado 16 archivos WAV, 8 para la escala mayor en do3 en Pulse1 usando este envelope
-![envelope major](doc/img/envelope-major.jpg)
-y los otros 8 para la escala menor en do3 en Triangle usando este envelope  
-![envelope minor](doc/img/envelope-minor.jpg)  
+Todos los archivos de audio se han creado usando [FamiTracker](http://famitracker.com/), se han creado 16 archivos WAV, 8 para la escala mayor en do3 en Pulse1 usando este envelope  
+![envelope major](doc/img/envelope-major.jpg)  
+y los otros 8 para la escala menor en do3 en Triangle usando este envelope    
+![envelope minor](doc/img/envelope-minor.jpg)    
 y este Duty/Noise   
-![duty/noise](doc/img/duty-minor.jpg)
+![duty/noise](doc/img/duty-minor.jpg)  
 
 
 Se han usado distintos envelopes y instrumentos para dar algo más de variación al sonido.
