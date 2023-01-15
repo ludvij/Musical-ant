@@ -6,10 +6,14 @@ const FPS = 60
 
 function togglePause() {
 	pause = !pause
-	if (pause) 
+	if (pause) {
 		noLoop()
-	else 
+		startPause = new Date()
+	}
+	else {
+		elapsed_pause += new Date().getTime() - startPause.getTime()
 		loop()
+	}
 }
 
 
@@ -64,6 +68,8 @@ function setup() {
 	len_x = WIDTH / x
 	len_y = HEIGHT / y
 	pause = 0
+	startPause = new Date()
+	elapsed_pause = 0
 	mute = 0
 	grid = 0
 	scale = {}
@@ -111,6 +117,7 @@ function start_ant() {
 	sd = step_ant()
 	pxInfo = {}
 	start = new Date()
+	elapsed_pause = 0
 }
 
 function draw_grid() {
@@ -146,7 +153,7 @@ function repeat(n) {
 			paint_cell(sd.x, sd.y, cell_color)
 			sd = step_ant()
 			pxInfo[sd.x+'-'+sd.y] = sd.color
-			if ((new Date().getTime() - start.getTime()) * I1000 > uptime) {
+			if ((new Date().getTime() - start.getTime() - elapsed_pause) * I1000 > uptime) {
 				console.log('terminated in time')
 				start_ant()
 				break
