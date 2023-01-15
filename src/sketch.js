@@ -96,6 +96,7 @@ function draw() {
 
 function start_ant() {
 	background(255)
+	if (grid) draw_grid()
 	stroke(255)
 	// draw_grid()
 	create_ant(x, y)
