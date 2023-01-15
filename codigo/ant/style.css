@@ -1,0 +1,40 @@
+:root {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.contentDiv {
+	display: flex;
+	flex-direction: row;
+
+}
+
+.sketchDiv {
+	border: 2px solid black;
+	align-self: center;
+	width: 704px;
+	height: 704px;
+}
+
+
+.side {
+	padding-right: 1em;
+}
+
+.btn-ctrl {
+	min-width: 3em;
+}
+
+.toggle-grid {
+	width: 100%;
+}
+
+.control {
+	display: flex;
+	flex-direction: column;
+}
+
+.control-block {
+	margin-top: 1em;
+}

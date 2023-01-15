@@ -40,18 +40,25 @@ function set_ant_rules(rules) {
 	for(let i = 0; i < rules.length; i++) {
 		ant.rules[i] = new AntRule(rules.charAt(i), i)
 	}
+	return ant.rules.join("")
 }
 
 function create_rnd_ant_rules(n) {
 	let types = ['L','R']
 	let rules = ''
+	ant.rules = []
 	for(let i = 0; i < n; i++) {
 		let chooser = random_int(0, 2)
 		let rule = types[chooser]
 		rules += rule
 		ant.rules[i] = new AntRule(rule, i)
 	}
-	console.log('using rules: ' + rules)
+	// ruleset of only right or left cycles over itself so we will discard it
+	if (new RegExp('(R{8}|S{8})').test(rules)) {
+		return create_rnd_ant_rules(n)
+	} else {
+		return rules
+	}
 }
 
 
