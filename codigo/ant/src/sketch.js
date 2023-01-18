@@ -100,10 +100,10 @@ function start_ant() {
 	stroke(255)
 	// draw_grid()
 	create_ant(x, y)
+	let rules = create_rnd_ant_rules(8)
 	// set_ant_rules('LRRRRRLLR')
 	// set_ant_rules('LLRRRLRRRRRR')
 	// set_ant_rules('RRLLLRLLLRRR')
-	let rules = create_rnd_ant_rules(8)
 	let result = {};
 	for (let str of rules) {
 		result[str] = result.hasOwnProperty(str) ? result[str] + 1 : 1;
